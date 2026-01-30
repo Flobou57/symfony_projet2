@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier client{% endblock %}
+
+{% block body %}
+    <section class="form-page">
+        <div class="form-hero">
+            <div>
+                <div class="form-kicker">Clients</div>
+                <h1 class="form-title h3 mb-2">Modifier client</h1>
+                <p class="form-subtitle">Mettez a jour les informations du client.</p>
+            </div>
+            <div class="form-meta">
+                <div class="fw-semibold">Modification active</div>
+                <div class="small text-white-50">Les changements sont appliques des l'enregistrement.</div>
+            </div>
+        </div>
+        <div class="form-grid">
+            <div class="form-main">
+                {% include 'client/_form.html.twig' with {form: form, button_label: 'Mettre a jour'} %}
+            </div>
+            <aside class="form-side card">
+                <div class="card-body">
+                    <div class="form-side-title">Rappels</div>
+                    <div class="form-tip">
+                        <div class="form-tip-title">Email</div>
+                        <div class="small text-white-50">Verifiez l'adresse principale.</div>
+                    </div>
+                    <div class="form-tip">
+                        <div class="form-tip-title">Telephone</div>
+                        <div class="small text-white-50">Mettre a jour si changement recent.</div>
+                    </div>
+                    <div class="form-tip">
+                        <div class="form-tip-title">Adresse</div>
+                        <div class="small text-white-50">Assurez-vous qu'elle est complete.</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+{% endblock %}

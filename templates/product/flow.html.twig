@@ -1,0 +1,136 @@
+{% extends 'base.html.twig' %}
+
+{% set type_labels = {
+    (TYPE_PHYSICAL): 'Physique',
+    (TYPE_DIGITAL): 'Numerique'
+} %}
+
+{% set step_labels = {
+    type: 'Type de produit',
+    details: 'Details',
+    confirmation: 'Confirmation',
+    logistics: 'Logistique',
+    license: 'Licence / acces',
+    summary: 'Recapitulatif'
+} %}
+
+{% set current_step = form.vars.cursor.currentStep %}
+{% set step_title = step_labels[current_step]|default('Etape') %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block body %}
+    <section class="form-page">
+        <div class="form-hero">
+            <div>
+                <div class="form-kicker">Produits</div>
+                <h1 class="form-title h3 mb-2">{{ page_title }}</h1>
+                <p class="form-subtitle">{{ step_title }}</p>
+            </div>
+            <div class="form-meta">
+                <div class="fw-semibold">Etape en cours</div>
+                <div class="small text-white-50">{{ step_title }}</div>
+                <a class="btn btn-sm btn-outline-light mt-3" href="{{ path('product_index') }}">Retour a la liste</a>
+            </div>
+        </div>
+
+        <div class="form-grid">
+            <div class="form-main">
+                <div class="mb-4">
+                    <div class="d-flex flex-wrap gap-3">
+                        {% for step in form.vars.visible_steps %}
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge rounded-pill {{ step.is_current_step ? 'text-bg-primary' : 'text-bg-secondary' }}">
+                                    {{ step.position }}
+                                </span>
+                                <span class="{{ step.is_current_step ? 'fw-semibold' : 'text-muted' }}">
+                                    {{ step_labels[step.name]|default(step.name) }}
+                                </span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        {% if current_step == 'summary' %}
+                            <div class="mb-4">
+                                <h2 class="h5">Recapitulatif</h2>
+                                <dl class="row mb-0">
+                                    <dt class="col-sm-3">Nom</dt>
+                                    <dd class="col-sm-9">{{ data.name }}</dd>
+                                    <dt class="col-sm-3">Description</dt>
+                                    <dd class="col-sm-9">{{ data.description }}</dd>
+                                    <dt class="col-sm-3">Prix</dt>
+                                    <dd class="col-sm-9">{{ data.price }}</dd>
+                                    <dt class="col-sm-3">Type</dt>
+                                    <dd class="col-sm-9">{{ type_labels[data.productType]|default(data.productType) }}</dd>
+                                    {% if data.productType == TYPE_PHYSICAL %}
+                                        <dt class="col-sm-3">Poids</dt>
+                                        <dd class="col-sm-9">{{ data.weight }}</dd>
+                                        <dt class="col-sm-3">Dimensions</dt>
+                                        <dd class="col-sm-9">{{ data.dimensions }}</dd>
+                                        <dt class="col-sm-3">Stock</dt>
+                                        <dd class="col-sm-9">{{ data.stock }}</dd>
+                                    {% endif %}
+                                    {% if data.productType == TYPE_DIGITAL %}
+                                        <dt class="col-sm-3">Cle de licence</dt>
+                                        <dd class="col-sm-9">{{ data.licenseKey }}</dd>
+                                        <dt class="col-sm-3">URL d'acces</dt>
+                                        <dd class="col-sm-9">{{ data.accessUrl }}</dd>
+                                    {% endif %}
+                                </dl>
+                            </div>
+                        {% endif %}
+
+                        {{ form_start(form) }}
+                            <div class="row g-3">
+                                {% for child in form %}
+                                    {% if child.vars.name != 'navigator' %}
+                                        <div class="col-12">
+                                            {{ form_row(child) }}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <div>
+                                    {% if form.navigator is defined and form.navigator.previous is defined %}
+                                        {{ form_widget(form.navigator.previous, {label: 'Precedent', attr: {class: 'btn btn-outline-secondary'}}) }}
+                                    {% endif %}
+                                </div>
+                                <div class="d-flex gap-2">
+                                    {% if form.navigator is defined and form.navigator.next is defined %}
+                                        {{ form_widget(form.navigator.next, {label: 'Suivant', attr: {class: 'btn btn-primary'}}) }}
+                                    {% endif %}
+                                    {% if form.navigator is defined and form.navigator.finish is defined %}
+                                        {{ form_widget(form.navigator.finish, {label: 'Valider', attr: {class: 'btn btn-success'}}) }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+
+            <aside class="form-side card">
+                <div class="card-body">
+                    <div class="form-side-title">Bonnes pratiques</div>
+                    <div class="form-tip">
+                        <div class="form-tip-title">Nom</div>
+                        <div class="small text-white-50">Court, clair, sans jargon interne.</div>
+                    </div>
+                    <div class="form-tip">
+                        <div class="form-tip-title">Prix</div>
+                        <div class="small text-white-50">Indiquez la devise et le format decimal.</div>
+                    </div>
+                    <div class="form-tip">
+                        <div class="form-tip-title">Type</div>
+                        <div class="small text-white-50">Physique: poids et stock. Numerique: acces et licence.</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+{% endblock %}

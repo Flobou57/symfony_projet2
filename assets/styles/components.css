@@ -1,0 +1,97 @@
+.card {
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.card-header,
+.card-footer {
+    background-color: var(--surface);
+    border-color: var(--border);
+}
+
+.table {
+    color: var(--text-900);
+}
+
+.table thead th {
+    font-weight: 600;
+    color: var(--text-600);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    --bs-table-bg-type: #f7f9fc;
+}
+
+.form-control,
+.form-select {
+    border-radius: 12px;
+    border-color: var(--border);
+    box-shadow: none;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: rgba(37, 99, 235, 0.6);
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.2);
+}
+
+.btn {
+    border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-500), var(--accent-600));
+    border: none;
+}
+
+.btn-outline-primary {
+    border-color: var(--accent-500);
+    color: var(--accent-600);
+}
+
+.btn-outline-primary:hover {
+    background-color: rgba(37, 99, 235, 0.1);
+    border-color: var(--accent-600);
+    color: var(--accent-600);
+}
+
+.btn-outline-secondary {
+    border-color: #cbd5e1;
+    color: #475569;
+}
+
+.badge {
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+.badge.text-bg-secondary {
+    background-color: #e2e8f0 !important;
+    color: #334155 !important;
+}
+
+.toast-container {
+    z-index: 2000;
+}
+
+.toast {
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+}
+
+.table-responsive {
+    border-radius: 16px;
+}
+
+/* Product flow form - white text for labels */
+.card label,
+.card .form-label,
+.card .form-check-label {
+    color: #ffffff;
+}

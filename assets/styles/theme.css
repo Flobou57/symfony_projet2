@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root {
+    --brand-950: #0a0f1a;
+    --brand-900: #101827;
+    --brand-800: #162133;
+    --brand-700: #1e2d44;
+    --accent-500: #2563eb;
+    --accent-600: #1d4ed8;
+    --surface: #ffffff;
+    --surface-muted: #f4f7fb;
+    --surface-soft: #e9eef6;
+    --text-900: #0b1220;
+    --text-600: #5b6b84;
+    --border: #d7e0ee;
+    --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.08);
+    --shadow-md: 0 14px 30px rgba(15, 23, 42, 0.12);
+}
+
+body {
+    font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+    color: var(--text-900);
+    background: radial-gradient(circle at 20% 10%, #eef3ff 0%, #f6f8fc 45%, #eef2f8 100%);
+    letter-spacing: 0.1px;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Space Grotesk", "Segoe UI", sans-serif;
+    letter-spacing: -0.3px;
+}
+
+.bg-light {
+    background-color: transparent !important;
+}
+
+.bg-dark {
+    background-color: var(--brand-900) !important;
+    color: #e2e8f0;
+}
+
+.text-muted {
+    color: var(--text-600) !important;
+}

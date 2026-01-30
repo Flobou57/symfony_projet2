@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in{% endblock %}
+
+{% block body %}
+    <section class="form-page">
+        <div class="container py-5">
+            <div class="form-hero">
+                <div>
+                    <div class="form-kicker">Backoffice</div>
+                    <h1 class="form-title h3 mb-2">Connexion</h1>
+                    <p class="form-subtitle">Accedez au panneau d'administration.</p>
+                </div>
+                <div class="form-meta">
+                    <div class="fw-semibold">Acces securise</div>
+                    <div class="small text-white-50">Utilisez un compte de demo pour tester.</div>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-main">
+                    <form method="post" class="card shadow-sm">
+                        <div class="card-body">
+                            {% if error %}
+                                <div class="alert alert-danger">
+                                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                                </div>
+                            {% endif %}
+
+                            <div class="mb-3">
+                                <label class="form-label" for="email">Email</label>
+                                <input
+                                    type="email"
+                                    value="{{ last_username }}"
+                                    name="email"
+                                    id="email"
+                                    class="form-control"
+                                    autocomplete="email"
+                                    required
+                                >
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="password">Password</label>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    class="form-control"
+                                    autocomplete="current-password"
+                                    required
+                                >
+                            </div>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <button class="btn btn-primary w-100" type="submit">Sign in</button>
+                        </div>
+                    </form>
+                </div>
+                <aside class="form-side card">
+                    <div class="card-body">
+                        <div class="form-side-title">Identifiants de demo</div>
+                        <div class="form-tip">
+                            <div class="form-tip-title">Admin</div>
+                            <div class="small text-white-50">admin@example.com</div>
+                            <div class="small text-white-50">Mot de passe: password</div>
+                        </div>
+                        <div class="form-tip">
+                            <div class="form-tip-title">Manager</div>
+                            <div class="small text-white-50">manager@example.com</div>
+                            <div class="small text-white-50">Mot de passe: password</div>
+                        </div>
+                        <div class="form-tip">
+                            <div class="form-tip-title">User</div>
+                            <div class="small text-white-50">user@example.com</div>
+                            <div class="small text-white-50">Mot de passe: password</div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+{% endblock %}

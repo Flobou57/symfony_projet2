@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    {{ form_row(form.firstname) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.lastname) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.email) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.phoneNumber) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(form.address) }}
+                </div>
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+            <a class="btn btn-link" href="{{ path('client_index') }}">Retour</a>
+            <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+        </div>
+    </div>
+{{ form_end(form) }}

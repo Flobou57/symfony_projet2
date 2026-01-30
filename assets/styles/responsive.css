@@ -1,0 +1,9 @@
+@media (max-width: 768px) {
+    .nav-pills .nav-link {
+        padding: 0.45rem 0.75rem;
+    }
+
+    .card {
+        border-radius: 14px;
+    }
+}

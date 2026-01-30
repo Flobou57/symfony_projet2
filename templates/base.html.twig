@@ -2,17 +2,511 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+                :root {
+                    --bg-950: #080d17;
+                    --bg-900: #0c1322;
+                    --bg-850: #111b2f;
+                    --surface-900: #121b2d;
+                    --surface-800: #182236;
+                    --border: #22304b;
+                    --text-900: #e5edf7;
+                    --text-600: #9fb0c7;
+                    --accent-500: #3b82f6;
+                    --accent-600: #2563eb;
+                    --accent-700: #1d4ed8;
+                    --shadow-sm: 0 10px 24px rgba(5, 9, 17, 0.4);
+                }
+
+                body {
+                    font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+                    color: var(--text-900);
+                    background: radial-gradient(circle at 20% 10%, #111b33 0%, #0b111f 45%, #080d17 100%);
+                    letter-spacing: 0.15px;
+                }
+
+                h1, h2, h3, h4, h5, h6,
+                .h1, .h2, .h3, .h4, .h5, .h6 {
+                    font-family: "Space Grotesk", "Segoe UI", sans-serif;
+                    letter-spacing: -0.3px;
+                }
+
+                a {
+                    color: var(--text-900);
+                    text-decoration: none;
+                }
+
+                a:hover {
+                    color: #ffffff;
+                }
+
+                .bg-light {
+                    background-color: transparent !important;
+                }
+
+                .bg-dark {
+                    background: linear-gradient(180deg, #0d1628 0%, #0b121f 100%) !important;
+                }
+
+                .nav-pills .nav-link {
+                    border-radius: 12px;
+                    font-weight: 600;
+                    padding: 0.55rem 0.9rem;
+                    color: rgba(229, 237, 247, 0.75);
+                }
+
+                .nav-pills .nav-link.active,
+                .nav-pills .show > .nav-link {
+                    background: linear-gradient(135deg, var(--accent-500), var(--accent-700));
+                    color: #ffffff;
+                    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.25);
+                }
+
+                .nav-link.disabled,
+                .nav-link.text-white-50.disabled {
+                    color: rgba(229, 237, 247, 0.35) !important;
+                }
+
+                .card {
+                    border-radius: 18px;
+                    border: 1px solid var(--border);
+                    background: var(--surface-900);
+                    box-shadow: var(--shadow-sm);
+                }
+
+                .card-header,
+                .card-footer {
+                    background: var(--surface-900);
+                    border-color: var(--border);
+                }
+
+                .table {
+                    color: var(--text-900);
+                    background-color: var(--surface-900);
+                    --bs-table-bg: var(--surface-900);
+                }
+
+                .table td,
+                .table th {
+                    color: var(--text-900);
+                }
+
+                .table thead th {
+                    color: var(--text-600);
+                    text-transform: uppercase;
+                    font-size: 0.72rem;
+                    letter-spacing: 0.12em;
+                    border-color: var(--border);
+                }
+
+                .table-striped > tbody > tr:nth-of-type(odd) > * {
+                    --bs-table-bg-type: #0f1828;
+                }
+
+                .table > :not(caption) > * > * {
+                    border-color: var(--border);
+                    background-color: var(--surface-900);
+                }
+
+                .table-light {
+                    --bs-table-bg: #0f1828;
+                }
+
+                .table-light th {
+                    background-color: #0f1828;
+                }
+
+                .form-control,
+                .form-select {
+                    border-radius: 12px;
+                    background: var(--surface-800);
+                    border: 1px solid var(--border);
+                    color: var(--text-900);
+                }
+
+                .form-control:focus,
+                .form-select:focus {
+                    border-color: rgba(59, 130, 246, 0.6);
+                    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.2);
+                    background: var(--surface-800);
+                    color: var(--text-900);
+                }
+
+                .form-check-input {
+                    background-color: var(--surface-800);
+                    border: 1px solid var(--border);
+                }
+
+                .form-check-input:checked {
+                    background-color: var(--accent-600);
+                    border-color: var(--accent-600);
+                }
+
+                .form-check-input:focus {
+                    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.2);
+                    border-color: rgba(59, 130, 246, 0.6);
+                }
+
+                .btn {
+                    border-radius: 12px;
+                    font-weight: 600;
+                    letter-spacing: 0.2px;
+                }
+
+                .btn-primary {
+                    background: linear-gradient(135deg, var(--accent-500), var(--accent-700));
+                    border: none;
+                }
+
+                .btn-outline-primary {
+                    border-color: var(--accent-500);
+                    color: var(--accent-500);
+                }
+
+                .btn-outline-primary:hover {
+                    background-color: rgba(59, 130, 246, 0.15);
+                    border-color: var(--accent-600);
+                    color: #ffffff;
+                }
+
+                .btn-outline-secondary {
+                    border-color: #334155;
+                    color: #cbd5f5;
+                }
+
+                .user-new-page,
+                .form-page {
+                    --bs-body-color: #ffffff;
+                    --bs-body-color-rgb: 255, 255, 255;
+                    --bs-link-color: #ffffff;
+                    --bs-link-hover-color: #ffffff;
+                    color: #ffffff;
+                }
+
+                .user-new-hero,
+                .form-hero {
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                    gap: 2rem;
+                    margin-bottom: 1.5rem;
+                }
+
+                .user-new-kicker,
+                .form-kicker {
+                    text-transform: uppercase;
+                    letter-spacing: 0.22em;
+                    font-size: 0.68rem;
+                    color: rgba(255, 255, 255, 0.6);
+                }
+
+                .user-new-title,
+                .form-title {
+                    font-size: 2rem;
+                }
+
+                .user-new-subtitle,
+                .form-subtitle {
+                    color: rgba(255, 255, 255, 0.7);
+                    max-width: 36rem;
+                    margin: 0;
+                }
+
+                .user-new-meta,
+                .form-meta {
+                    border-radius: 16px;
+                    border: 1px solid rgba(59, 130, 246, 0.35);
+                    background: rgba(59, 130, 246, 0.12);
+                    padding: 0.9rem 1.1rem;
+                    min-width: 220px;
+                    color: #ffffff;
+                    font-size: 0.85rem;
+                }
+
+                .user-new-grid,
+                .form-grid {
+                    display: grid;
+                    grid-template-columns: minmax(0, 1fr) 280px;
+                    gap: 1.5rem;
+                    align-items: start;
+                }
+
+                .user-new-form .card,
+                .form-main .card {
+                    position: relative;
+                    overflow: hidden;
+                    border-color: rgba(59, 130, 246, 0.28);
+                    background: linear-gradient(180deg, rgba(24, 34, 54, 0.95), rgba(17, 27, 47, 0.96));
+                }
+
+                .user-new-form .card::before,
+                .form-main .card::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 3px;
+                    background: linear-gradient(90deg, var(--accent-500), #22d3ee, var(--accent-700));
+                    pointer-events: none;
+                }
+
+                .user-new-form input[type="text"],
+                .form-main input[type="text"],
+                .user-new-form input[type="email"],
+                .form-main input[type="email"],
+                .user-new-form input[type="password"],
+                .form-main input[type="password"],
+                .user-new-form input[type="tel"],
+                .form-main input[type="tel"],
+                .user-new-form input[type="search"],
+                .form-main input[type="search"],
+                .user-new-form input[type="url"],
+                .form-main input[type="url"],
+                .user-new-form input[type="number"],
+                .form-main input[type="number"],
+                .user-new-form textarea,
+                .form-main textarea,
+                .user-new-form select,
+                .form-main select {
+                    width: 100%;
+                    border-radius: 12px;
+                    border: 1px solid rgba(59, 130, 246, 0.25);
+                    background: rgba(12, 19, 34, 0.9);
+                    color: #ffffff;
+                    padding: 0.55rem 0.75rem;
+                    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+                }
+
+                .user-new-form input[type="text"]::placeholder,
+                .form-main input[type="text"]::placeholder,
+                .user-new-form input[type="email"]::placeholder,
+                .form-main input[type="email"]::placeholder,
+                .user-new-form input[type="password"]::placeholder,
+                .form-main input[type="password"]::placeholder,
+                .user-new-form input[type="tel"]::placeholder,
+                .form-main input[type="tel"]::placeholder,
+                .user-new-form input[type="search"]::placeholder,
+                .form-main input[type="search"]::placeholder,
+                .user-new-form input[type="url"]::placeholder,
+                .form-main input[type="url"]::placeholder,
+                .user-new-form input[type="number"]::placeholder,
+                .form-main input[type="number"]::placeholder,
+                .user-new-form textarea::placeholder,
+                .form-main textarea::placeholder {
+                    color: rgba(255, 255, 255, 0.45);
+                }
+
+                .user-new-form input[type="text"]:focus,
+                .form-main input[type="text"]:focus,
+                .user-new-form input[type="email"]:focus,
+                .form-main input[type="email"]:focus,
+                .user-new-form input[type="password"]:focus,
+                .form-main input[type="password"]:focus,
+                .user-new-form input[type="tel"]:focus,
+                .form-main input[type="tel"]:focus,
+                .user-new-form input[type="search"]:focus,
+                .form-main input[type="search"]:focus,
+                .user-new-form input[type="url"]:focus,
+                .form-main input[type="url"]:focus,
+                .user-new-form input[type="number"]:focus,
+                .form-main input[type="number"]:focus,
+                .user-new-form textarea:focus,
+                .form-main textarea:focus,
+                .user-new-form select:focus,
+                .form-main select:focus {
+                    outline: none;
+                    border-color: rgba(59, 130, 246, 0.6);
+                    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.2);
+                    background: rgba(15, 23, 42, 0.95);
+                }
+
+                .user-new-form input[type="text"]:disabled,
+                .form-main input[type="text"]:disabled,
+                .user-new-form input[type="email"]:disabled,
+                .form-main input[type="email"]:disabled,
+                .user-new-form input[type="password"]:disabled,
+                .form-main input[type="password"]:disabled,
+                .user-new-form input[type="tel"]:disabled,
+                .form-main input[type="tel"]:disabled,
+                .user-new-form input[type="search"]:disabled,
+                .form-main input[type="search"]:disabled,
+                .user-new-form input[type="url"]:disabled,
+                .form-main input[type="url"]:disabled,
+                .user-new-form input[type="number"]:disabled,
+                .form-main input[type="number"]:disabled,
+                .user-new-form textarea:disabled,
+                .form-main textarea:disabled,
+                .user-new-form select:disabled,
+                .form-main select:disabled {
+                    background: rgba(12, 19, 34, 0.6);
+                    color: rgba(255, 255, 255, 0.5);
+                }
+
+                .user-new-form input:-webkit-autofill,
+                .form-main input:-webkit-autofill,
+                .user-new-form input:-webkit-autofill:hover,
+                .form-main input:-webkit-autofill:hover,
+                .user-new-form input:-webkit-autofill:focus,
+                .form-main input:-webkit-autofill:focus,
+                .user-new-form textarea:-webkit-autofill,
+                .form-main textarea:-webkit-autofill,
+                .user-new-form textarea:-webkit-autofill:hover,
+                .form-main textarea:-webkit-autofill:hover,
+                .user-new-form textarea:-webkit-autofill:focus,
+                .form-main textarea:-webkit-autofill:focus,
+                .user-new-form select:-webkit-autofill,
+                .form-main select:-webkit-autofill,
+                .user-new-form select:-webkit-autofill:hover,
+                .form-main select:-webkit-autofill:hover,
+                .user-new-form select:-webkit-autofill:focus,
+                .form-main select:-webkit-autofill:focus {
+                    -webkit-text-fill-color: #ffffff;
+                    -webkit-box-shadow: 0 0 0 1000px rgba(12, 19, 34, 0.9) inset;
+                    transition: background-color 9999s ease-in-out 0s;
+                }
+
+                .user-new-side,
+                .form-side {
+                    border-radius: 18px;
+                    border: 1px solid rgba(148, 163, 184, 0.2);
+                    background: linear-gradient(180deg, rgba(18, 27, 45, 0.85), rgba(12, 19, 34, 0.95));
+                }
+
+                .user-new-side .card-body,
+                .form-side .card-body {
+                    display: grid;
+                    gap: 1rem;
+                }
+
+                .user-new-side-title,
+                .form-side-title {
+                    text-transform: uppercase;
+                    letter-spacing: 0.2em;
+                    font-size: 0.65rem;
+                    color: rgba(255, 255, 255, 0.55);
+                }
+
+                .user-new-tip-title,
+                .form-tip-title {
+                    font-weight: 600;
+                }
+
+                @media (max-width: 992px) {
+                    .user-new-grid,
+                    .form-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .user-new-hero,
+                    .form-hero {
+                        flex-direction: column;
+                    }
+
+                    .user-new-meta,
+                    .form-meta {
+                        width: 100%;
+                    }
+                }
+
+                @media (max-width: 576px) {
+                    .user-new-title,
+                    .form-title {
+                        font-size: 1.6rem;
+                    }
+                }
+
+                .badge.text-bg-secondary {
+                    background-color: #1e293b !important;
+                    color: #cbd5f5 !important;
+                }
+
+                .text-muted {
+                    color: var(--text-600) !important;
+                }
+
+                .toast {
+                    border-radius: 14px;
+                    box-shadow: var(--shadow-sm);
+                }
+
+                .toast-container {
+                    z-index: 2000;
+                }
+
+                @media (max-width: 768px) {
+                    .card {
+                        border-radius: 14px;
+                    }
+
+                    .nav-pills .nav-link {
+                        padding: 0.5rem 0.75rem;
+                    }
+                }
+            </style>
         {% endblock %}
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
+            <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         {% endblock %}
     </head>
-    <body>
-        {{ include('common/_flash_messages.html.twig') }}
-        {% block body %}{% endblock %}
+    <body class="bg-light">
+        {% if app.user %}
+            <div class="container-fluid">
+                <div class="row min-vh-100">
+                    <aside class="col-12 col-md-3 col-lg-2 bg-dark text-white p-3 d-flex flex-column">
+                        <div class="mb-4">
+                            <div class="h5 mb-1">Backoffice</div>
+                            <div class="small text-white-50">Gestion interne</div>
+                        </div>
+                        <nav class="nav nav-pills flex-column gap-1">
+                            {% if is_granted('USER_MANAGE') %}
+                                <a
+                                    class="nav-link text-white {% if app.request.attributes.get('_route') starts with 'user_' %}active{% endif %}"
+                                    href="{{ path('user_index') }}"
+                                >
+                                    Utilisateurs
+                                </a>
+                            {% endif %}
+                            <a
+                                class="nav-link text-white {% if app.request.attributes.get('_route') starts with 'product_' %}active{% endif %}"
+                                href="{{ path('product_index') }}"
+                            >
+                                Produits
+                            </a>
+                            {% if is_granted('CLIENT_MANAGE') %}
+                                <a
+                                    class="nav-link text-white {% if app.request.attributes.get('_route') starts with 'client_' %}active{% endif %}"
+                                    href="{{ path('client_index') }}"
+                                >
+                                    Clients
+                                </a>
+                            {% endif %}
+                        </nav>
+                        <div class="mt-auto pt-4 border-top border-secondary">
+                            <div class="small text-white-50">Connecte</div>
+                            <div class="fw-semibold">{{ app.user.email }}</div>
+                            <a class="btn btn-sm btn-outline-light mt-2" href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    </aside>
+                    <main class="col-12 col-md-9 col-lg-10 p-4">
+        {% endif %}
+
+                        {{ include('common/_flash_messages.html.twig') }}
+                        {% block body %}{% endblock %}
+
+        {% if app.user %}
+                    </main>
+                </div>
+            </div>
+        {% endif %}
     </body>
 </html>

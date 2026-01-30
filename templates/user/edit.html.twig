@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier utilisateur{% endblock %}
+
+{% block body %}
+    <section class="user-new-page">
+        <div class="user-new-hero">
+            <div>
+                <div class="user-new-kicker">Utilisateurs</div>
+                <h1 class="user-new-title h3 mb-2">Modifier utilisateur</h1>
+                <p class="user-new-subtitle">Mettez a jour les informations et les droits du compte.</p>
+            </div>
+            <div class="user-new-meta">
+                <div class="fw-semibold">Modification active</div>
+                <div class="small text-white-50">Les changements sont appliques des l'enregistrement.</div>
+            </div>
+        </div>
+        <div class="user-new-grid">
+            <div class="user-new-form">
+                {% include 'user/_form.html.twig' with {form: form, button_label: 'Mettre a jour'} %}
+            </div>
+            <aside class="user-new-side card">
+                <div class="card-body">
+                    <div class="user-new-side-title">Rappels</div>
+                    <div class="user-new-tip">
+                        <div class="user-new-tip-title">Email</div>
+                        <div class="small text-white-50">Verifiez qu'il reste joignable.</div>
+                    </div>
+                    <div class="user-new-tip">
+                        <div class="user-new-tip-title">Roles</div>
+                        <div class="small text-white-50">Retirez les acces inutiles.</div>
+                    </div>
+                    <div class="user-new-tip">
+                        <div class="user-new-tip-title">Trace</div>
+                        <div class="small text-white-50">Notez la modification si besoin.</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+{% endblock %}

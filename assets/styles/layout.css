@@ -1,0 +1,18 @@
+.nav-pills .nav-link {
+    border-radius: 10px;
+    font-weight: 500;
+    padding: 0.55rem 0.9rem;
+    color: #d6e2f5;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    background: linear-gradient(135deg, var(--accent-500), var(--accent-600));
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+}
+
+.nav-link.disabled,
+.nav-link.text-white-50.disabled {
+    color: rgba(214, 226, 245, 0.35) !important;
+}

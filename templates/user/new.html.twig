@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel utilisateur{% endblock %}
+
+{% block body %}
+    <section class="user-new-page">
+        <div class="user-new-hero">
+            <div>
+                <div class="user-new-kicker">Utilisateurs</div>
+                <h1 class="user-new-title h3 mb-2">Nouvel utilisateur</h1>
+                <p class="user-new-subtitle">Creez un compte pour donner acces au backoffice.</p>
+            </div>
+            <div class="user-new-meta">
+                <div class="fw-semibold">Acces backoffice</div>
+                <div class="small text-white-50">Definissez les roles avant la premiere connexion.</div>
+            </div>
+        </div>
+        <div class="user-new-grid">
+            <div class="user-new-form">
+                {% include 'user/_form.html.twig' with {form: form, button_label: 'Creer'} %}
+            </div>
+            <aside class="user-new-side card">
+                <div class="card-body">
+                    <div class="user-new-side-title">Bonnes pratiques</div>
+                    <div class="user-new-tip">
+                        <div class="user-new-tip-title">Email</div>
+                        <div class="small text-white-50">Utilisez l'adresse professionnelle de l'utilisateur.</div>
+                    </div>
+                    <div class="user-new-tip">
+                        <div class="user-new-tip-title">Mot de passe</div>
+                        <div class="small text-white-50">Minimum 12 caracteres recommande.</div>
+                    </div>
+                    <div class="user-new-tip">
+                        <div class="user-new-tip-title">Roles</div>
+                        <div class="small text-white-50">Limitez les droits au strict necessaire.</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+{% endblock %}
