@@ -47,7 +47,3 @@ Projet de backoffice pour la gestion des utilisateurs, produits et clients.
 - Lancer les tests :
   - `php bin/phpunit`
 
-## Livrables finaux
-
-- Deposer le code source sur GitHub (le fichier `.gitignore` exclut `vendor` et fichiers locaux).
-- Ajouter une video de demonstration (optionnel).
